@@ -8,7 +8,7 @@ public class XcodeBasedManifestLoader: ManifestLoader {
 
     }
     
-    public func load(at fileURL: URL) throws -> Manifest {
+    public func load(from data: Data) throws -> Manifest {
         fatalError("XcodeBasedManifestLoader has not yet been implemented.")
     }
 }

@@ -8,10 +8,9 @@ public class SyntaxBasedManifestLoader: ManifestLoader {
     public init() {
     }
 
-    public func load(at fileURL: URL) throws -> Manifest {
-        // Load the source file, avoid using `String(contentsOf:)` because it creates a wrapped NSString.
-        let fileData = try Data(contentsOf: fileURL)
-        let source = fileData.withUnsafeBytes {
+    public func load(from data: Data) throws -> Manifest {
+        // Load the source file as a String
+        let source = data.withUnsafeBytes {
             String(decoding: $0.bindMemory(to: UInt8.self), as: UTF8.self)
         }
 
@@ -19,7 +18,7 @@ public class SyntaxBasedManifestLoader: ManifestLoader {
         let toolsVersion = try detectToolsVersion(in: source)
 
         // Parse the AST and walk through to parse the Package contents
-        let sourceFile = try SwiftSyntax.SyntaxParser.parse(source: source, filenameForDiagnostics: fileURL.path)
+        let sourceFile = try SwiftSyntax.SyntaxParser.parse(source: source)
         let collector = ManifestCollector()
         collector.walk(sourceFile)
 

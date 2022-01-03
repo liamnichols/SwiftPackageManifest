@@ -1,5 +1,4 @@
 import SwiftSyntax
-import UIKit
 
 extension ExprSyntax {
     var isNilLiteral: Bool {
