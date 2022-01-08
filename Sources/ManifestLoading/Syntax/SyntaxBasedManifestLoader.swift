@@ -30,7 +30,7 @@ public class SyntaxBasedManifestLoader: ManifestLoader {
     }
 
     private func detectToolsVersion(in source: String) throws -> ToolsVersion {
-        let regex = try NSRegularExpression(pattern: #"swift-tools-version:\s(.*)"#, options: [])
+        let regex = try NSRegularExpression(pattern: #"swift-tools-version:\s?(.*)"#, options: [])
         let range = NSRange(source.startIndex ..< source.endIndex, in: source)
 
         guard let match = regex.firstMatch(in: source, options: [], range: range) else {
