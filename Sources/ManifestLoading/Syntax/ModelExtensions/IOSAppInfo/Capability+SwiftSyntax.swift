@@ -8,7 +8,7 @@ extension ProductSetting.IOSAppInfo.Capability: ExpressibleByFunctionCallExprSyn
 
     init(functionCall: FunctionCallExprSyntax, context: SyntaxParserContext) throws {
         let memberAccess = try functionCall.memberAccess(context)
-        let member = try MemberAccessName(memberAccess: memberAccess, context: context)
+        let member = try Label(memberAccess: memberAccess, context: context)
 
         self = try SyntaxArgumentProcessor.process(argumentList: functionCall.argumentList, in: context) { processor in
             // Every member has an optional (unlabelled) condition, first parse that
@@ -73,33 +73,12 @@ extension ProductSetting.IOSAppInfo.Capability: ExpressibleByFunctionCallExprSyn
     }
 }
 
-private extension ProductSetting.IOSAppInfo.Capability {
-    enum MemberAccessName: String {
-        case appTransportSecurity
-        case bluetoothAlways
-        case calendars
-        case camera
-        case contacts
-        case faceID
-        case localNetwork
-        case locationAlwaysAndWhenInUse
-        case locationWhenInUse
-        case mediaLibrary
-        case microphone
-        case motion
-        case nearbyInteractionAllowOnce
-        case photoLibrary
-        case photoLibraryAdd
-        case reminders
-        case speechRecognition
-        case userTracking
-
-        init(memberAccess: MemberAccessExprSyntax, context: SyntaxParserContext) throws {
-            if let value = MemberAccessName(rawValue: memberAccess.name.text) {
-                self = value
-            } else {
-                throw context.error("'\(memberAccess.name.text)' is not a supported Capability member")
-            }
+private extension ProductSetting.IOSAppInfo.Capability.Label {
+    init(memberAccess: MemberAccessExprSyntax, context: SyntaxParserContext) throws {
+        if let value = Self(rawValue: memberAccess.name.text) {
+            self = value
+        } else {
+            throw context.error("'\(memberAccess.name.text)' is not a supported Capability member")
         }
     }
 }
