@@ -115,7 +115,7 @@ class ManifestWriterTests: XCTestCase {
         let result = try writer.write(manifest)
 
         XCTAssertEqual(result, """
-        // swift-tools-version 5.5
+        // swift-tools-version: 5.5
 
         // Generated using https://github.com/liamnichols/SwiftPackageManifest
 
