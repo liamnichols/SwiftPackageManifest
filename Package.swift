@@ -11,7 +11,8 @@ let package = Package(
     ],
     products: [
         .library(name: "ManifestDescription", targets: ["ManifestDescription"]),
-        .library(name: "ManifestLoading", targets: ["ManifestLoading"])
+        .library(name: "ManifestLoading", targets: ["ManifestLoading"]),
+        .library(name: "ManifestWriting", targets: ["ManifestWriting"])
     ],
     dependencies: [
         .package(
@@ -29,6 +30,7 @@ let package = Package(
     ],
     targets: [
         .target(name: "ManifestDescription"),
+
         .target(name: "ManifestLoading", dependencies: [
             "ManifestDescription",
             "SwiftSyntax",
@@ -37,6 +39,16 @@ let package = Package(
         .testTarget(name: "ManifestLoadingTests", dependencies: [
             "ManifestLoading",
             "Difference"
-        ])
+        ]),
+
+        .target(name: "ManifestWriting", dependencies: [
+            "ManifestDescription",
+            "SwiftSyntax",
+            "_InternalSwiftSyntaxParser"
+        ]),
+        .testTarget(name: "ManifestWritingTests", dependencies: [
+            "ManifestWriting",
+            "Difference"
+        ]),
     ]
 )
