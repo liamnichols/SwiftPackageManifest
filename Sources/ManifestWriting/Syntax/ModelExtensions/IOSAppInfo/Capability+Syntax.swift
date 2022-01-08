@@ -21,11 +21,11 @@ extension ProductSetting.IOSAppInfo.Capability: FunctionCallSyntaxRepresentable 
                 expression: configuration
             ))
 
-        case .localNetwork(let promptMessage, let bonjourServiceTypes, _):
+        case .localNetwork(let purposeString, let bonjourServiceTypes, _):
             arguments.append(contentsOf: [
                 FunctionCallArgument(
-                    label: "promptMessage",
-                    expression: StringLiteral(content: promptMessage)
+                    label: "purposeString",
+                    expression: StringLiteral(content: purposeString)
                 ),
                 FunctionCallArgument(
                     label: "bonjourServiceTypes",
@@ -35,25 +35,25 @@ extension ProductSetting.IOSAppInfo.Capability: FunctionCallSyntaxRepresentable 
                 ),
             ])
 
-        case .bluetoothAlways(let promptMessage, _),
-             .calendars(let promptMessage, _),
-             .camera(let promptMessage, _),
-             .contacts(let promptMessage, _),
-             .faceID(let promptMessage, _),
-             .locationAlwaysAndWhenInUse(let promptMessage, _),
-             .locationWhenInUse(let promptMessage, _),
-             .mediaLibrary(let promptMessage, _),
-             .microphone(let promptMessage, _),
-             .motion(let promptMessage, _),
-             .nearbyInteractionAllowOnce(let promptMessage, _),
-             .photoLibrary(let promptMessage, _),
-             .photoLibraryAdd(let promptMessage, _),
-             .reminders(let promptMessage, _),
-             .speechRecognition(let promptMessage, _),
-             .userTracking(let promptMessage, _):
+        case .bluetoothAlways(let purposeString, _),
+             .calendars(let purposeString, _),
+             .camera(let purposeString, _),
+             .contacts(let purposeString, _),
+             .faceID(let purposeString, _),
+             .locationAlwaysAndWhenInUse(let purposeString, _),
+             .locationWhenInUse(let purposeString, _),
+             .mediaLibrary(let purposeString, _),
+             .microphone(let purposeString, _),
+             .motion(let purposeString, _),
+             .nearbyInteractionAllowOnce(let purposeString, _),
+             .photoLibrary(let purposeString, _),
+             .photoLibraryAdd(let purposeString, _),
+             .reminders(let purposeString, _),
+             .speechRecognition(let purposeString, _),
+             .userTracking(let purposeString, _):
             arguments.append(FunctionCallArgument(
-                label: "promptMessage",
-                expression: StringLiteral(content: promptMessage)
+                label: "purposeString",
+                expression: StringLiteral(content: purposeString)
             ))
         }
 
