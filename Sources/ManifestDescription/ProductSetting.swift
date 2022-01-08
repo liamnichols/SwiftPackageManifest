@@ -69,6 +69,16 @@ public enum ProductSetting: Equatable, Codable {
                     return .landscapeLeft
                 }
             }
+
+            public var condition: DeviceFamilyCondition? {
+                switch self {
+                case .portrait(let condition),
+                     .portraitUpsideDown(let condition),
+                     .landscapeRight(let condition),
+                     .landscapeLeft(let condition):
+                    return condition
+                }
+            }
         }
 
         /// A capability required by the device.
