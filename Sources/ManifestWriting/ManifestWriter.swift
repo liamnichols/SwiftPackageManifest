@@ -22,7 +22,7 @@ public class ManifestWriter {
     public func write(_ manifest: Manifest) throws -> String {
         // Create the initial leading trivia, the swift-tools-version definition + header
         let leadingTrivia: Trivia = [
-            .lineComment("// swift-tools-version \(manifest.toolsVersion.commentRepresentation)"),
+            .lineComment("// swift-tools-version: \(manifest.toolsVersion.commentRepresentation)"),
             .newlines(2)
         ] + options.headerTrivia + [
             .newlines(1)

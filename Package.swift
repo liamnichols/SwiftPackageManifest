@@ -36,19 +36,16 @@ let package = Package(
             "SwiftSyntax",
             "_InternalSwiftSyntaxParser"
         ]),
-        .testTarget(name: "ManifestLoadingTests", dependencies: [
-            "ManifestLoading",
-            "Difference"
-        ]),
-
         .target(name: "ManifestWriting", dependencies: [
             "ManifestDescription",
             "SwiftSyntax",
             "_InternalSwiftSyntaxParser"
         ]),
-        .testTarget(name: "ManifestWritingTests", dependencies: [
+
+        .testTarget(name: "ManifestTests", dependencies: [
+            "ManifestLoading",
             "ManifestWriting",
             "Difference"
-        ]),
+        ])
     ]
 )

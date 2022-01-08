@@ -12,11 +12,27 @@ class PrettyPrinter: SyntaxRewriter {
     // Might come back to this later..
     func shouldIndentNode(_ node: Syntax) -> Bool {
         if let node = node.as(FunctionCallExprSyntax.self) {
-            return node.argumentList.count > 3
+            return node.argumentList.count > 1
         }
 
         if let node = node.as(ArrayExprSyntax.self) {
-            return node.elements.count > 1
+            if node.elements.isEmpty {
+                return false
+            } else if node.elements.count == 1, let expression = node.elements.first?.expression {
+                if expression.is(StringLiteralExprSyntax.self) {
+                    return false
+                } else if expression.is(BooleanLiteralExprSyntax.self) {
+                    return false
+                } else if expression.is(NilLiteralExprSyntax.self) {
+                    return false
+                } else if expression.is(MemberAccessExprSyntax.self) {
+                    return false
+                } else {
+                    return true
+                }
+            } else {
+                return true
+            }
         }
 
         return false
