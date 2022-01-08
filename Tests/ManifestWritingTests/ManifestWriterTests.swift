@@ -110,6 +110,8 @@ class ManifestWriterTests: XCTestCase {
         )
 
         let writer = ManifestWriter()
+        writer.options.prettyPrint = false
+        
         let result = try writer.write(manifest)
 
         XCTAssertEqual(result, """

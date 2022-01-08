@@ -4,16 +4,16 @@ import SwiftSyntax
 
 public class ManifestWriter {
     public struct Options {
-        /// The header comment to include when writing the manifest
+        /// The header comment to include when writing the manifest.
         public var header: String = """
         Generated using https://github.com/liamnichols/SwiftPackageManifest
         """
 
-        /// If the contents should be pretty printed or not
-        public var prettyPrint: Bool = false
+        /// If the contents should be pretty printed or not, default value is `true`.
+        public var prettyPrint: Bool = true
     }
 
-    public let options = Options()
+    public var options = Options()
 
     public init() {
 
@@ -51,7 +51,11 @@ public class ManifestWriter {
             )
         }
 
-        return sourceFile.description
+        if options.prettyPrint {
+            return PrettyPrinter().visit(sourceFile).description
+        } else {
+            return sourceFile.description
+        }
     }
 }
 
