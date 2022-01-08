@@ -41,10 +41,6 @@ public enum ProductSetting: Equatable, Codable {
 
         /// Represents a supported device interface orientation.
         public enum InterfaceOrientation: Equatable, Codable {
-            public enum Label: String {
-                case portrait, portraitUpsideDown, landscapeRight, landscapeLeft
-            }
-
             public static var portrait: InterfaceOrientation { .portrait() }
             case portrait(DeviceFamilyCondition? = nil)
 
@@ -56,29 +52,6 @@ public enum ProductSetting: Equatable, Codable {
 
             public static var landscapeLeft: InterfaceOrientation { .landscapeLeft() }
             case landscapeLeft(DeviceFamilyCondition? = nil)
-
-            public var label: Label {
-                switch self {
-                case .portrait:
-                    return .portrait
-                case .portraitUpsideDown:
-                    return .portraitUpsideDown
-                case .landscapeRight:
-                    return .landscapeRight
-                case .landscapeLeft:
-                    return .landscapeLeft
-                }
-            }
-
-            public var condition: DeviceFamilyCondition? {
-                switch self {
-                case .portrait(let condition),
-                     .portraitUpsideDown(let condition),
-                     .landscapeRight(let condition),
-                     .landscapeLeft(let condition):
-                    return condition
-                }
-            }
         }
 
         /// A capability required by the device.
