@@ -6,6 +6,7 @@ As part of this package, there are two libraries:
 
 - **ManifestDescription** - Models used to represent the contents of a SPM Manifest.
 - **ManifestLoading** - Classes capable of loading `Manifest` representations from **Package.swift** source files.
+- **ManifestWriting** - Capable of writing out a **Package.swift** file based on a `Manifest` representation.
 
 ## ManifestLoading
 

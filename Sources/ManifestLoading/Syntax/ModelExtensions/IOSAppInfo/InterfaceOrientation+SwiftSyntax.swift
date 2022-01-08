@@ -4,7 +4,7 @@ import SwiftSyntax
 
 extension ProductSetting.IOSAppInfo.InterfaceOrientation: ExpressibleByMemberAccessExprSyntax, ExpressibleByFunctionCallExprSyntax, TransformableFromExprSyntax {
     init(memberAccess: MemberAccessExprSyntax, context: SyntaxParserContext) throws {
-        switch try MemberAccessName(memberAccess: memberAccess, context: context) {
+        switch try Label(memberAccess: memberAccess, context: context) {
         case .portrait:
             self = .portrait
         case .portraitUpsideDown:
@@ -37,7 +37,7 @@ extension ProductSetting.IOSAppInfo.InterfaceOrientation: ExpressibleByMemberAcc
             }
 
             // Read the member access name anyway
-            switch try MemberAccessName(memberAccess: memberAccess, context: context) {
+            switch try Label(memberAccess: memberAccess, context: context) {
             case .portrait:
                 return .portrait(condition)
             case .portraitUpsideDown:
@@ -51,16 +51,12 @@ extension ProductSetting.IOSAppInfo.InterfaceOrientation: ExpressibleByMemberAcc
     }
 }
 
-private extension ProductSetting.IOSAppInfo.InterfaceOrientation {
-    private enum MemberAccessName: String {
-        case portrait, portraitUpsideDown, landscapeRight, landscapeLeft
-
-        init(memberAccess: MemberAccessExprSyntax, context: SyntaxParserContext) throws {
-            if let value = MemberAccessName(rawValue: memberAccess.name.text) {
-                self = value
-            } else {
-                throw context.error("'\(memberAccess.name.text)' is not a supported InterfaceOrientation member")
-            }
+private extension ProductSetting.IOSAppInfo.InterfaceOrientation.Label {
+    init(memberAccess: MemberAccessExprSyntax, context: SyntaxParserContext) throws {
+        if let value = Self(rawValue: memberAccess.name.text) {
+            self = value
+        } else {
+            throw context.error("'\(memberAccess.name.text)' is not a supported InterfaceOrientation member")
         }
     }
 }
